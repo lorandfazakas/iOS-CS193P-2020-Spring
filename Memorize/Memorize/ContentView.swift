@@ -14,14 +14,17 @@ struct ContentView: View {
     var body: some View {
         HStack {
             ForEach(viewModel.cards) { card in
-                CardView(card: card).onTapGesture {
-                    self.viewModel.choose(card: card)
-                }
+                CardView(card: card)
+                    .onTapGesture {
+                        self.viewModel.choose(card: card)
+                    }
+                .aspectRatio(2/3, contentMode: .fit)
             }
         }
         .padding()
         .foregroundColor(.orange)
-        .font(.largeTitle)
+        .font(viewModel.cards.count < 10 ? .largeTitle : .title)
+
         
     }
 }
