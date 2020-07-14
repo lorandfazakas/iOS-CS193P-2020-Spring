@@ -19,6 +19,8 @@
 		8773654224B5873C001EE6A2 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773654124B5873C001EE6A2 /* GridLayout.swift */; };
 		8773654424B58A28001EE6A2 /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773654324B58A28001EE6A2 /* Array+Identifiable.swift */; };
 		8773654624B9C54F001EE6A2 /* Array+Only.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773654524B9C54F001EE6A2 /* Array+Only.swift */; };
+		8773654824BD7898001EE6A2 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773654724BD7897001EE6A2 /* Pie.swift */; };
+		8773654C24BD828C001EE6A2 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773654B24BD828C001EE6A2 /* Cardify.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		8773654124B5873C001EE6A2 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		8773654324B58A28001EE6A2 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		8773654524B9C54F001EE6A2 /* Array+Only.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Only.swift"; sourceTree = "<group>"; };
+		8773654724BD7897001EE6A2 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		8773654B24BD828C001EE6A2 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +72,11 @@
 		8773652624ADA2B8001EE6A2 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				8773654B24BD828C001EE6A2 /* Cardify.swift */,
 				8773652724ADA2B8001EE6A2 /* AppDelegate.swift */,
 				8773652924ADA2B8001EE6A2 /* SceneDelegate.swift */,
 				8773652B24ADA2B8001EE6A2 /* EmojiMemoryGameView.swift */,
+				8773654724BD7897001EE6A2 /* Pie.swift */,
 				8773653F24B582E9001EE6A2 /* Grid.swift */,
 				8773654324B58A28001EE6A2 /* Array+Identifiable.swift */,
 				8773654524B9C54F001EE6A2 /* Array+Only.swift */,
@@ -164,6 +170,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8773654C24BD828C001EE6A2 /* Cardify.swift in Sources */,
+				8773654824BD7898001EE6A2 /* Pie.swift in Sources */,
 				8773652824ADA2B8001EE6A2 /* AppDelegate.swift in Sources */,
 				8773652A24ADA2B8001EE6A2 /* SceneDelegate.swift in Sources */,
 				8773653C24B06D9B001EE6A2 /* MemoryGame.swift in Sources */,
