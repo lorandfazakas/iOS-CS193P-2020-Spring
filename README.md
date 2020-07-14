@@ -9,4 +9,6 @@ This course is available for free on YouTube.
 | 2 | MVVM and the Swift Type System | [Slides](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l2.pdf) | 
 | 3 | Reactive UI Protocols Layout | [Slides](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l3_0.pdf) | 
 | 4 | Grid enum Optionals | [Slides](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l4.pdf) | 
+| 5 | ViewBuilder, Shape, ViewModifier | [Slides](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/lecture_5.pdf) | 
+| 6 | Animation | [Slides](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/lecture_6.pdf) | 
 
