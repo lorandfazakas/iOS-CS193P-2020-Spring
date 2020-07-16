@@ -18,7 +18,6 @@ struct ShapeSetGameView: View {
                 .padding(5)
         }
         .padding()
-        .foregroundColor(.orange)
     }
 }
 

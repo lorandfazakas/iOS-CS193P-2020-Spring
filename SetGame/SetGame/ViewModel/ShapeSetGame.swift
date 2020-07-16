@@ -25,13 +25,6 @@ class ShapeSetGame: ObservableObject{
         Array(setGame.faceUpCards)
     }
     
-    func path(forShape shape: Shape) -> AnyShape {
-        switch shape {
-        case .diamond: return AnyShape(Diamond())
-        case .circle: return AnyShape(Circle())
-        case .squiggle: return AnyShape(Squiggle())
-        }
-    }
     
     // MARK: - Intent(s)
     

@@ -24,11 +24,6 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
     }
     
     private func body(for layout: GridLayout) -> some View {
-//        var viewForItems = [View]
-//        for item in items {
-//            viewForItems.append(self.body(for: item, in: layout))
-//        }
-//        return viewForItems
         ForEach(items) { item in
             self.body(for: item, in: layout)
         }
