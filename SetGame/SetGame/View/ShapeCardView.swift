@@ -40,14 +40,23 @@ struct ShapeCardView: View {
     
     @ViewBuilder
     func shape() -> some View {
-        if card.firstFeature == .diamond {
-            Diamond()
-        } else if card.firstFeature == .circle {
-            Circle()
-        } else if card.firstFeature == .squiggle {
-            Squiggle()
-        } else {
-            EmptyView()
+        Group {
+            if card.firstFeature == .diamond {
+                ZStack {
+                    Diamond().fill(color()).opacity(shade())
+                    Diamond().stroke(color(), lineWidth: edgeLineWidth)
+                }
+            } else if card.firstFeature == .circle {
+                ZStack {
+                    Circle().fill(color()).opacity(shade())
+                    Circle().stroke(color(), lineWidth: edgeLineWidth)
+                }
+            } else if card.firstFeature == .squiggle {
+                ZStack {
+                    Squiggle().fill(color()).opacity(shade())
+                    Squiggle().stroke(color(), lineWidth: edgeLineWidth)
+                }
+            }
         }
     }
     
@@ -61,6 +70,19 @@ struct ShapeCardView: View {
             return SwiftUI.Color(.red)
         }
     }
+    
+    func shade() -> Double {
+        switch card.thirdFeature {
+        case .shaded:
+            return 0.3
+        case .solid:
+            return 1
+        case .unfilled:
+            return 0
+        }
+    }
+    
+    private let edgeLineWidth: CGFloat = 3
 }
 
 struct ShapeCardView_Previews: PreviewProvider {
