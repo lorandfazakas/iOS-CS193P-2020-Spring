@@ -17,9 +17,9 @@ enum Shade: CaseIterable {
 }
 
 enum Shape: CaseIterable {
-    case diamond, squiggle, oval
+    case diamond, squiggle, circle
 }
 
-enum NumberOfElements: CaseIterable {
-    case one, two, three
+enum NumberOfElements: Int, CaseIterable {
+    case one=1, two=2, three=3
 }

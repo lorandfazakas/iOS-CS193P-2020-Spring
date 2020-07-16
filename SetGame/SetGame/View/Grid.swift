@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
-    private var items: [Item]
+    private var items: Array<Item>
     private var viewForItem: (Item) -> ItemView
     
-    init(_ items: [Item], viewForItem: @escaping (Item) -> ItemView) {
+    init(_ items: Array<Item>, viewForItem: @escaping (Item) -> ItemView) {
         self.items = items
         self.viewForItem = viewForItem
     }
@@ -24,6 +24,11 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
     }
     
     private func body(for layout: GridLayout) -> some View {
+//        var viewForItems = [View]
+//        for item in items {
+//            viewForItems.append(self.body(for: item, in: layout))
+//        }
+//        return viewForItems
         ForEach(items) { item in
             self.body(for: item, in: layout)
         }

@@ -8,14 +8,22 @@
 
 import SwiftUI
 
-struct Diamond: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+struct Diamond: SwiftUI.Shape {
+    
+    private let shapeMargin: CGFloat = 0.15
 
-struct Diamond_Previews: PreviewProvider {
-    static var previews: some View {
-        Diamond()
+    func path(in rect: CGRect) -> Path {
+        let margin = min(rect.size.width, rect.size.height) * shapeMargin
+        let topCenter = CGPoint(x: rect.midX, y: rect.minY + margin)
+        let centerRight = CGPoint(x: rect.maxX - margin, y: rect.midY)
+        let bottomCenter = CGPoint(x: rect.midX, y: rect.maxY - margin)
+        let centerLeft = CGPoint(x: rect.minX + margin, y: rect.midY)
+        var path = Path()
+        path.move(to: topCenter)
+        path.addLine(to: centerRight)
+        path.addLine(to: bottomCenter)
+        path.addLine(to: centerLeft)
+        path.addLine(to: topCenter)
+        return path
     }
 }

@@ -8,14 +8,16 @@
 
 import SwiftUI
 
-struct Oval: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+struct Oval: SwiftUI.Shape {
+    
+    private let shapeMargin: CGFloat = 0.15
 
-struct Oval_Previews: PreviewProvider {
-    static var previews: some View {
-        Oval()
+    func path(in rect: CGRect) -> Path {
+        let margin = min(rect.size.width, rect.size.height) * shapeMargin
+        let rectWithMargin = CGRect(x: rect.origin.x + margin,
+                                    y: rect.origin.y + margin,
+                                    width: rect.size.width - (margin * 2),
+                                    height: rect.size.height - (margin * 2))
+        return Path(ovalIn: rectWithMargin)
     }
 }

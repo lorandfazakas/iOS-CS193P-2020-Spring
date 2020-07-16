@@ -8,8 +8,10 @@
 
 import Foundation
 
-struct Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>: CustomStringConvertible, Hashable where
+struct Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>: CustomStringConvertible, Hashable, Identifiable where
     FirstFeature: Hashable, SecondFeature: Hashable, ThirdFeature: Hashable, FourthFeature: Hashable {
+    
+    var id = UUID()
     var description: String {
         return "\(firstFeature), \(secondFeature), \(thirdFeature), \(fourthFeature)"
     }

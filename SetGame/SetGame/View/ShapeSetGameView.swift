@@ -12,32 +12,17 @@ struct ShapeSetGameView: View {
     @ObservedObject var shapeSetGame: ShapeSetGame
     
     var body: some View {
-        Text("Hello, World!")
-    }
-}
-
-struct CardView: View {
-    var card: Card<Shape, Color, Shade, NumberOfElements>
-    
-    var body: some View {
-        GeometryReader { geometry in
-            self.body(for: geometry.size)
+        Grid(shapeSetGame.faceUpCards) { card in
+            ShapeCardView(shapeSetGame: self.shapeSetGame, card: card)
+                .aspectRatio(2/3, contentMode: .fit)
+                .padding(5)
         }
-    }
-    
-    @ViewBuilder
-    private func body(for size: CGSize) -> some View {
-        
-    }
-    
-    // MARK: - Drawing Constants
-    
-    func fontSize(for size: CGSize) -> CGFloat {
-        min(size.width, size.height) * 0.7
+        .padding()
+        .foregroundColor(.orange)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ShapeSetGameView_Previews: PreviewProvider {
     static var previews: some View {
         ShapeSetGameView(shapeSetGame: ShapeSetGame())
     }
