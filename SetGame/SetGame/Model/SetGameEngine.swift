@@ -9,13 +9,21 @@
 import Foundation
 
 struct SetGameEngine<FirstFeature, SecondFeature, ThirdFeature, FourthFeature> where
-    FirstFeature: CaseIterable, FirstFeature: Hashable,
-    SecondFeature: CaseIterable, SecondFeature: Hashable,
-    ThirdFeature: CaseIterable, ThirdFeature: Hashable,
-    FourthFeature: CaseIterable, FourthFeature: Hashable {
+    FirstFeature: CaseIterable, FirstFeature: Equatable,
+    SecondFeature: CaseIterable, SecondFeature: Equatable,
+    ThirdFeature: CaseIterable, ThirdFeature: Equatable,
+    FourthFeature: CaseIterable, FourthFeature: Equatable {
     
-    private(set) var deck = Set<Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>>()
-    private(set) var faceUpCards = Set<Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>>()
+    private var indicesOfSelectedCards: [Int] {
+        get { deck.indices.filter { deck[$0].isSelected } }
+    }
+    
+    private var indicesOfDealtCards: [Int] {
+        get { deck.indices.filter { deck[$0].isDealt } } 
+    }
+    
+    private(set) var deck = Array<Card>()
+//    private(set) var openCards = Array<Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>>()
     private(set) var score = 0
     
     init() {
@@ -27,43 +35,46 @@ struct SetGameEngine<FirstFeature, SecondFeature, ThirdFeature, FourthFeature> w
                     let thirdFeature = $0
                     FourthFeature.allCases.forEach {
                         let fourthFeature = $0
-                        deck.insert(Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>(firstFeature: firstFeature, secondFeature: secondFeature, thirdFeature: thirdFeature, fourthFeature: fourthFeature))
+                        deck.append(Card(firstFeature: firstFeature, secondFeature: secondFeature, thirdFeature: thirdFeature, fourthFeature: fourthFeature))
                     }
                 }
             }
         }
+        deck.shuffle()
     }
     
-    @discardableResult
-    mutating func draw(numberOfCards: Int) -> Set<Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>> {
-        var drawnCards = Set<Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>>()
-        for _ in 1...numberOfCards {
-            if let drawnCard = deck.randomElement() {
-                drawnCards.insert(drawnCard)
-                faceUpCards.insert(drawnCard)
-                deck.remove(drawnCard)
-            } else {
-                break
+    mutating func draw(numberOfCards: Int) {
+        var drawnCardCount = 0
+        var i = 0
+        while (drawnCardCount < numberOfCards && i < deck.count) {
+            if !deck[i].isDealt {
+                deck[i].isDealt = true
+                drawnCardCount+=1
             }
+            i += 1
         }
-        return drawnCards
     }
     
-    mutating func evaluateSet(_ card1: Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>, _ card2: Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>, _ card3: Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>) -> Bool {
-        guard faceUpCards.contains(card1) && faceUpCards.contains(card2) && faceUpCards.contains(card3) else {
-            return false
-        }
-        let isSet = self.isSet(card1, card2, card3)
+    mutating func evaluateSet() {
+        let selectedCards = indicesOfSelectedCards
+        let isSet = self.isSet()
         if isSet {
-            faceUpCards.remove(card1)
-            faceUpCards.remove(card2)
-            faceUpCards.remove(card3)
+            deck[selectedCards[0]].isInSet = true
+            deck[selectedCards[1]].isInSet = true
+            deck[selectedCards[2]].isInSet = true
         }
+        deck[selectedCards[0]].isSelected = false
+        deck[selectedCards[1]].isSelected = false
+        deck[selectedCards[2]].isSelected = false
+        
         score += isSet ? Score.validSet : Score.invalidSet
-        return isSet
     }
     
-    private func isSet(_ card1: Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>, _ card2: Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>, _ card3: Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>) -> Bool {
+    private func isSet() -> Bool {
+        let selectedCards = indicesOfSelectedCards
+        let card1 = deck[selectedCards[0]]
+        let card2 = deck[selectedCards[1]]
+        let card3 = deck[selectedCards[2]]
         let firstFeatureDifferent = card1.firstFeature != card2.firstFeature && card2.firstFeature != card3.firstFeature && card3.firstFeature != card1.firstFeature
         let secondFeatureDifferent = card1.secondFeature != card2.secondFeature && card2.secondFeature != card3.secondFeature && card3.secondFeature != card1.secondFeature
         let thirdFeatureDifferent = card1.thirdFeature != card2.thirdFeature && card2.thirdFeature != card3.thirdFeature && card3.thirdFeature != card1.thirdFeature
@@ -71,7 +82,39 @@ struct SetGameEngine<FirstFeature, SecondFeature, ThirdFeature, FourthFeature> w
         return firstFeatureDifferent && secondFeatureDifferent && thirdFeatureDifferent && fourthFeatureDifferent
     }
     
+    mutating func choose(card: Card) {
+        let cardIndex = deck.firstIndex(matching: card)!
+        deck[cardIndex].isSelected = !deck[cardIndex].isSelected
+        if indicesOfSelectedCards.count == 3 {
+            evaluateSet()
+        }
+    }
     
+    struct Card: CustomStringConvertible, Identifiable {
+        
+        var id = UUID()
+        var description: String {
+            return "\(firstFeature), \(secondFeature), \(thirdFeature), \(fourthFeature)"
+        }
+        
+        var firstFeature: FirstFeature
+        var secondFeature: SecondFeature
+        var thirdFeature: ThirdFeature
+        var fourthFeature: FourthFeature
+        var isSelected = false
+        var isDealt = false
+        var isInSet = false
+        
+        static func ==(lhs: Card, rhs: Card) -> Bool {
+            return (
+                (lhs.firstFeature == rhs.firstFeature) &&
+                    (lhs.secondFeature == rhs.secondFeature) &&
+                    (lhs.thirdFeature == rhs.thirdFeature) &&
+                    (lhs.fourthFeature == rhs.fourthFeature)
+            )
+        }
+    }
+
     
 }
 

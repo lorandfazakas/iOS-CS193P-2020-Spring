@@ -10,11 +10,13 @@ import SwiftUI
 
 struct Cardify: AnimatableModifier {
     
+    var isSelected: Bool
+    
     func body(content: Content) -> some View {
         ZStack {
             Group {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(SwiftUI.Color.white)
-                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
+                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth).foregroundColor(isSelected ? .orange : .black)
                 content
             }
         }
@@ -25,7 +27,7 @@ struct Cardify: AnimatableModifier {
 }
 
 extension View {
-    func cardify() -> some View {
-        self.modifier(Cardify())
+    func cardify(isSelected: Bool) -> some View {
+        self.modifier(Cardify(isSelected: isSelected))
     }
 }

@@ -19,7 +19,6 @@
 		87BEF10424BEE3F400E94074 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF10324BEE3F400E94074 /* GridLayout.swift */; };
 		87BEF10624BEE46900E94074 /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF10524BEE46900E94074 /* Array+Identifiable.swift */; };
 		87BEF10824BEE5AE00E94074 /* ShapeFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF10724BEE5AE00E94074 /* ShapeFeatures.swift */; };
-		87BEF10A24BEE60000E94074 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF10924BEE60000E94074 /* Card.swift */; };
 		87BEF11124BEE82F00E94074 /* ShapeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF11024BEE82F00E94074 /* ShapeCardView.swift */; };
 		87BEF11324BEE8C400E94074 /* Squiggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF11224BEE8C400E94074 /* Squiggle.swift */; };
 		87BEF11524BEE8DD00E94074 /* Diamond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF11424BEE8DD00E94074 /* Diamond.swift */; };
@@ -42,7 +41,6 @@
 		87BEF10324BEE3F400E94074 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		87BEF10524BEE46900E94074 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		87BEF10724BEE5AE00E94074 /* ShapeFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeFeatures.swift; sourceTree = "<group>"; };
-		87BEF10924BEE60000E94074 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		87BEF11024BEE82F00E94074 /* ShapeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeCardView.swift; sourceTree = "<group>"; };
 		87BEF11224BEE8C400E94074 /* Squiggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Squiggle.swift; sourceTree = "<group>"; };
 		87BEF11424BEE8DD00E94074 /* Diamond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diamond.swift; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				87BEF0FD24BDFA1600E94074 /* SetGameEngine.swift */,
-				87BEF10924BEE60000E94074 /* Card.swift */,
 				87BEF10724BEE5AE00E94074 /* ShapeFeatures.swift */,
 			);
 			path = Model;
@@ -232,7 +229,6 @@
 				87BEF10624BEE46900E94074 /* Array+Identifiable.swift in Sources */,
 				87BEF11324BEE8C400E94074 /* Squiggle.swift in Sources */,
 				87BEF10824BEE5AE00E94074 /* ShapeFeatures.swift in Sources */,
-				87BEF10A24BEE60000E94074 /* Card.swift in Sources */,
 				87BEF11924BF048C00E94074 /* AnyShape.swift in Sources */,
 				87BEF10424BEE3F400E94074 /* GridLayout.swift in Sources */,
 				87BEF10224BEE3DA00E94074 /* Grid.swift in Sources */,

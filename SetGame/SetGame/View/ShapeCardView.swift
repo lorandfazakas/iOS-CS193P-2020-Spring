@@ -11,7 +11,7 @@ import SwiftUI
 struct ShapeCardView: View {
     @ObservedObject var shapeSetGame: ShapeSetGame
     
-    var card: Card<Shape, Color, Shade, NumberOfElements>
+    var card: SetGameEngine<Shape, Color, Shade, NumberOfElements>.Card
 
     var body: some View {
         GeometryReader { geometry in
@@ -25,7 +25,7 @@ struct ShapeCardView: View {
             cardContent()
                 .foregroundColor(color())
         }
-        .cardify()
+        .cardify(isSelected: card.isSelected)
     }
     
     @ViewBuilder

@@ -21,8 +21,12 @@ class ShapeSetGame: ObservableObject{
     
     // MARK: - Access to the Model
     
-    var faceUpCards: Array<Card<Shape, Color, Shade, NumberOfElements>> {
-        Array(setGame.faceUpCards)
+    var faceUpCards: Array<SetGameEngine<Shape, Color, Shade, NumberOfElements>.Card> {
+        setGame.deck.filter { $0.isDealt && !$0.isInSet }
+    }
+    
+    var score: Int {
+        setGame.score
     }
     
     
@@ -30,6 +34,10 @@ class ShapeSetGame: ObservableObject{
     
     func draw(numberOfCards: Int) {
         setGame.draw(numberOfCards: numberOfCards)
+    }
+    
+    func choose(card: SetGameEngine<Shape, Color, Shade, NumberOfElements>.Card) {
+        setGame.choose(card: card)
     }
     
     func newGame() {

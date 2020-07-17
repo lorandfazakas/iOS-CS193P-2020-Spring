@@ -12,12 +12,27 @@ struct ShapeSetGameView: View {
     @ObservedObject var shapeSetGame: ShapeSetGame
     
     var body: some View {
-        Grid(shapeSetGame.faceUpCards) { card in
-            ShapeCardView(shapeSetGame: self.shapeSetGame, card: card)
+        VStack {
+            Grid(shapeSetGame.faceUpCards) { card in
+                ShapeCardView(shapeSetGame: self.shapeSetGame, card: card).onTapGesture {
+                    self.shapeSetGame.choose(card: card)
+                }
                 .aspectRatio(2/3, contentMode: .fit)
                 .padding(5)
+            }
+            .padding()
+            
+            HStack {
+                Button(action: {
+                    self.shapeSetGame.newGame()
+                }, label: {Text("New Game")} )
+                Text("Score: \(self.shapeSetGame.score)")
+                Button(action: {
+                    self.shapeSetGame.draw(numberOfCards: 3)
+                }, label: {Text("Draw")} )
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
