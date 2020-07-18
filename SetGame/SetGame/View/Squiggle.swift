@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Squiggle: SwiftUI.Shape {
+struct Squiggle: Shape {
  
     func path(in rect: CGRect) -> Path {
         var path = Path()

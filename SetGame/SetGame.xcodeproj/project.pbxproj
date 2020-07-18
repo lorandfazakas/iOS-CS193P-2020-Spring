@@ -107,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				87BEF0FF24BE014F00E94074 /* SetGame.swift */,
-				87BEF11824BF048C00E94074 /* AnyShape.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -129,6 +128,7 @@
 				87BEF10324BEE3F400E94074 /* GridLayout.swift */,
 				87BEF11224BEE8C400E94074 /* Squiggle.swift */,
 				87BEF11424BEE8DD00E94074 /* Diamond.swift */,
+				87BEF11824BF048C00E94074 /* AnyShape.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

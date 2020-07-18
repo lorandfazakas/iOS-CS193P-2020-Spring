@@ -8,14 +8,14 @@
 
 import SwiftUI
 
-public struct AnyShape: SwiftUI.Shape {
+public struct AnyShape: Shape {
     public var make: (CGRect, inout Path) -> ()
 
     public init(_ make: @escaping (CGRect, inout Path) -> ()) {
         self.make = make
     }
 
-    public init<S: SwiftUI.Shape>(_ shape: S) {
+    public init<S: Shape>(_ shape: S) {
         self.make = { rect, path in
             path = shape.path(in: rect)
         }

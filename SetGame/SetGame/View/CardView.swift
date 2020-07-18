@@ -35,7 +35,7 @@ struct CardView: View {
         }
     }
     
-    func shape(for size: CGSize) -> some View {
+    private func shape(for size: CGSize) -> some View {
         var shape: AnyShape
         switch card.shape {
         case .diamond:
@@ -52,7 +52,7 @@ struct CardView: View {
         }
     }
     
-    func shapePadding(for size: CGSize) -> CGFloat{
+    private func shapePadding(for size: CGSize) -> CGFloat{
         return size.height * 0.05
     }
     
