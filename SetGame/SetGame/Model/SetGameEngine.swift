@@ -8,11 +8,12 @@
 
 import Foundation
 
-struct SetGameEngine<FirstFeature, SecondFeature, ThirdFeature, FourthFeature> where
-    FirstFeature: CaseIterable, FirstFeature: Equatable,
-    SecondFeature: CaseIterable, SecondFeature: Equatable,
-    ThirdFeature: CaseIterable, ThirdFeature: Equatable,
-    FourthFeature: CaseIterable, FourthFeature: Equatable {
+struct SetGameEngine<Shape, ShapeCount, Shade, Color> where
+    Shape: CaseIterable & Equatable, ShapeCount: CaseIterable & Equatable,
+    Shade: CaseIterable & Equatable, Color: CaseIterable & Equatable {
+    
+    private(set) var deck = Array<Card>()
+    private(set) var score = 0
     
     private var indicesOfSelectedCards: [Int] {
         get { deck.indices.filter { deck[$0].isSelected } }
@@ -22,20 +23,18 @@ struct SetGameEngine<FirstFeature, SecondFeature, ThirdFeature, FourthFeature> w
         get { deck.indices.filter { deck[$0].isDealt } } 
     }
     
-    private(set) var deck = Array<Card>()
-//    private(set) var openCards = Array<Card<FirstFeature, SecondFeature, ThirdFeature, FourthFeature>>()
-    private(set) var score = 0
+    
     
     init() {
-        FirstFeature.allCases.forEach {
+        Shape.allCases.forEach {
             let firstFeature = $0
-            SecondFeature.allCases.forEach {
+            ShapeCount.allCases.forEach {
                 let secondFeature = $0
-                ThirdFeature.allCases.forEach {
+                Shade.allCases.forEach {
                     let thirdFeature = $0
-                    FourthFeature.allCases.forEach {
+                    Color.allCases.forEach {
                         let fourthFeature = $0
-                        deck.append(Card(firstFeature: firstFeature, secondFeature: secondFeature, thirdFeature: thirdFeature, fourthFeature: fourthFeature))
+                        deck.append(Card(shape: firstFeature, shapeCount: secondFeature, shade: thirdFeature, color: fourthFeature))
                     }
                 }
             }
@@ -55,19 +54,22 @@ struct SetGameEngine<FirstFeature, SecondFeature, ThirdFeature, FourthFeature> w
         }
     }
     
-    mutating func evaluateSet() {
+    mutating func evaluateSet() -> Bool {
         let selectedCards = indicesOfSelectedCards
         let isSet = self.isSet()
+//        let isSet = true
         if isSet {
             deck[selectedCards[0]].isInSet = true
             deck[selectedCards[1]].isInSet = true
             deck[selectedCards[2]].isInSet = true
+        } else {
+            deck[selectedCards[0]].isInSet = false
+            deck[selectedCards[1]].isInSet = false
+            deck[selectedCards[2]].isInSet = false
         }
-        deck[selectedCards[0]].isSelected = false
-        deck[selectedCards[1]].isSelected = false
-        deck[selectedCards[2]].isSelected = false
         
         score += isSet ? Score.validSet : Score.invalidSet
+        return isSet
     }
     
     private func isSet() -> Bool {
@@ -75,42 +77,55 @@ struct SetGameEngine<FirstFeature, SecondFeature, ThirdFeature, FourthFeature> w
         let card1 = deck[selectedCards[0]]
         let card2 = deck[selectedCards[1]]
         let card3 = deck[selectedCards[2]]
-        let firstFeatureDifferent = card1.firstFeature != card2.firstFeature && card2.firstFeature != card3.firstFeature && card3.firstFeature != card1.firstFeature
-        let secondFeatureDifferent = card1.secondFeature != card2.secondFeature && card2.secondFeature != card3.secondFeature && card3.secondFeature != card1.secondFeature
-        let thirdFeatureDifferent = card1.thirdFeature != card2.thirdFeature && card2.thirdFeature != card3.thirdFeature && card3.thirdFeature != card1.thirdFeature
-        let fourthFeatureDifferent = card1.fourthFeature != card2.fourthFeature && card2.fourthFeature != card3.fourthFeature && card3.fourthFeature != card1.fourthFeature
+        let firstFeatureDifferent = card1.shape != card2.shape && card2.shape != card3.shape && card3.shape != card1.shape
+        let secondFeatureDifferent = card1.shapeCount != card2.shapeCount && card2.shapeCount != card3.shapeCount && card3.shapeCount != card1.shapeCount
+        let thirdFeatureDifferent = card1.shade != card2.shade && card2.shade != card3.shade && card3.shade != card1.shade
+        let fourthFeatureDifferent = card1.color != card2.color && card2.color != card3.color && card3.color != card1.color
         return firstFeatureDifferent && secondFeatureDifferent && thirdFeatureDifferent && fourthFeatureDifferent
     }
     
-    mutating func choose(card: Card) {
+    mutating func choose(card: Card) -> Bool? {
+        let selectedCards = indicesOfSelectedCards
+        if indicesOfSelectedCards.count == 3 {
+            deck[selectedCards[0]].isSelected = false
+            deck[selectedCards[1]].isSelected = false
+            deck[selectedCards[2]].isSelected = false
+            if !(deck[selectedCards[0]].isInSet! && deck[selectedCards[1]].isInSet! && deck[selectedCards[2]].isInSet!) {
+                deck[selectedCards[0]].isInSet = nil
+                deck[selectedCards[1]].isInSet = nil
+                deck[selectedCards[2]].isInSet = nil
+            }
+        }
         let cardIndex = deck.firstIndex(matching: card)!
         deck[cardIndex].isSelected = !deck[cardIndex].isSelected
         if indicesOfSelectedCards.count == 3 {
-            evaluateSet()
+            return evaluateSet()
         }
+        return nil
     }
     
     struct Card: CustomStringConvertible, Identifiable {
         
         var id = UUID()
         var description: String {
-            return "\(firstFeature), \(secondFeature), \(thirdFeature), \(fourthFeature)"
+            return "\(shape), \(shapeCount), \(shade), \(color)"
         }
         
-        var firstFeature: FirstFeature
-        var secondFeature: SecondFeature
-        var thirdFeature: ThirdFeature
-        var fourthFeature: FourthFeature
+        var shape: Shape
+        var shapeCount: ShapeCount
+        var shade: Shade
+        var color: Color
+        
         var isSelected = false
         var isDealt = false
-        var isInSet = false
+        var isInSet: Bool?
         
         static func ==(lhs: Card, rhs: Card) -> Bool {
             return (
-                (lhs.firstFeature == rhs.firstFeature) &&
-                    (lhs.secondFeature == rhs.secondFeature) &&
-                    (lhs.thirdFeature == rhs.thirdFeature) &&
-                    (lhs.fourthFeature == rhs.fourthFeature)
+                (lhs.shape == rhs.shape) &&
+                    (lhs.shapeCount == rhs.shapeCount) &&
+                    (lhs.shade == rhs.shade) &&
+                    (lhs.color == rhs.color)
             )
         }
     }

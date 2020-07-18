@@ -1,5 +1,5 @@
 //
-//  ShapeSetGameView.swift
+//  SetGameView.swift
 //  SetGame
 //
 //  Created by Fazakas Loránd on 2020. 07. 14..
@@ -8,14 +8,16 @@
 
 import SwiftUI
 
-struct ShapeSetGameView: View {
-    @ObservedObject var shapeSetGame: ShapeSetGame
+struct SetGameView: View {
+    @ObservedObject var shapeSetGame: SetGame
+    
     
     var body: some View {
         VStack {
             Grid(shapeSetGame.faceUpCards) { card in
-                ShapeCardView(shapeSetGame: self.shapeSetGame, card: card).onTapGesture {
-                    self.shapeSetGame.choose(card: card)
+                CardView(card: card)
+                .onTapGesture {
+                        self.shapeSetGame.choose(card: card)
                 }
                 .aspectRatio(2/3, contentMode: .fit)
                 .padding(5)
@@ -29,7 +31,7 @@ struct ShapeSetGameView: View {
                 Text("Score: \(self.shapeSetGame.score)")
                 Button(action: {
                     self.shapeSetGame.draw(numberOfCards: 3)
-                }, label: {Text("Draw")} )
+                }, label: {Text("Deal 3 more cards")} )
             }
             .padding()
         }
@@ -38,6 +40,6 @@ struct ShapeSetGameView: View {
 
 struct ShapeSetGameView_Previews: PreviewProvider {
     static var previews: some View {
-        ShapeSetGameView(shapeSetGame: ShapeSetGame())
+        SetGameView(shapeSetGame: SetGame())
     }
 }
