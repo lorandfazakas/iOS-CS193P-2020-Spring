@@ -18,12 +18,7 @@ struct SetGameEngine<Shape, ShapeCount, Shade, Color> where
     private var indicesOfSelectedCards: [Int] {
         get { deck.indices.filter { deck[$0].isSelected } }
     }
-    
-    private var indicesOfDealtCards: [Int] {
-        get { deck.indices.filter { deck[$0].isDealt } } 
-    }
-    
-    
+
     
     init() {
         Shape.allCases.forEach {
@@ -54,10 +49,9 @@ struct SetGameEngine<Shape, ShapeCount, Shade, Color> where
         }
     }
     
-    mutating func evaluateSet() -> Bool {
+    private mutating func evaluateSet() {
         let selectedCards = indicesOfSelectedCards
         let isSet = self.isSet()
-//        let isSet = true
         if isSet {
             deck[selectedCards[0]].isInSet = true
             deck[selectedCards[1]].isInSet = true
@@ -69,7 +63,6 @@ struct SetGameEngine<Shape, ShapeCount, Shade, Color> where
         }
         
         score += isSet ? Score.validSet : Score.invalidSet
-        return isSet
     }
     
     private func isSet() -> Bool {
@@ -84,9 +77,12 @@ struct SetGameEngine<Shape, ShapeCount, Shade, Color> where
         return firstFeatureDifferent && secondFeatureDifferent && thirdFeatureDifferent && fourthFeatureDifferent
     }
     
-    mutating func choose(card: Card) -> Bool? {
+    mutating func choose(card: Card) {
+        guard !(card.isInSet ?? false) else {
+            return
+        }
         let selectedCards = indicesOfSelectedCards
-        if indicesOfSelectedCards.count == 3 {
+        if selectedCards.count == 3 {
             deck[selectedCards[0]].isSelected = false
             deck[selectedCards[1]].isSelected = false
             deck[selectedCards[2]].isSelected = false
@@ -94,14 +90,15 @@ struct SetGameEngine<Shape, ShapeCount, Shade, Color> where
                 deck[selectedCards[0]].isInSet = nil
                 deck[selectedCards[1]].isInSet = nil
                 deck[selectedCards[2]].isInSet = nil
+            } else {
+                self.draw(numberOfCards: 3)
             }
         }
         let cardIndex = deck.firstIndex(matching: card)!
         deck[cardIndex].isSelected = !deck[cardIndex].isSelected
         if indicesOfSelectedCards.count == 3 {
-            return evaluateSet()
+            evaluateSet()
         }
-        return nil
     }
     
     struct Card: CustomStringConvertible, Identifiable {

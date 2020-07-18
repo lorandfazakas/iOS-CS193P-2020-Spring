@@ -23,7 +23,6 @@
 		87BEF11324BEE8C400E94074 /* Squiggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF11224BEE8C400E94074 /* Squiggle.swift */; };
 		87BEF11524BEE8DD00E94074 /* Diamond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF11424BEE8DD00E94074 /* Diamond.swift */; };
 		87BEF11924BF048C00E94074 /* AnyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF11824BF048C00E94074 /* AnyShape.swift */; };
-		87C51D7E24C04ABD00CC9277 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C51D7D24C04ABD00CC9277 /* Cardify.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +44,6 @@
 		87BEF11224BEE8C400E94074 /* Squiggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Squiggle.swift; sourceTree = "<group>"; };
 		87BEF11424BEE8DD00E94074 /* Diamond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diamond.swift; sourceTree = "<group>"; };
 		87BEF11824BF048C00E94074 /* AnyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyShape.swift; sourceTree = "<group>"; };
-		87C51D7D24C04ABD00CC9277 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +132,6 @@
 				87BEF10324BEE3F400E94074 /* GridLayout.swift */,
 				87BEF11224BEE8C400E94074 /* Squiggle.swift */,
 				87BEF11424BEE8DD00E94074 /* Diamond.swift */,
-				87C51D7D24C04ABD00CC9277 /* Cardify.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,7 +219,6 @@
 				87BEF0EA24BDF88500E94074 /* AppDelegate.swift in Sources */,
 				87BEF10024BE014F00E94074 /* SetGame.swift in Sources */,
 				87BEF0EC24BDF88500E94074 /* SceneDelegate.swift in Sources */,
-				87C51D7E24C04ABD00CC9277 /* Cardify.swift in Sources */,
 				87BEF0FE24BDFA1600E94074 /* SetGameEngine.swift in Sources */,
 				87BEF11524BEE8DD00E94074 /* Diamond.swift in Sources */,
 				87BEF0EE24BDF88500E94074 /* SetGameView.swift in Sources */,

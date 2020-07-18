@@ -18,13 +18,18 @@ class SetGame: ObservableObject{
     
     init() {
         setGame = SetGameEngine()
-        setGame.draw(numberOfCards: initialNumberOfCards)
+        setGame.draw(numberOfCards: 0)
     }
     
     // MARK: - Access to the Model
     
     var faceUpCards: Array<ShapeSetGame.Card> {
         setGame.deck.filter { $0.isDealt && (!($0.isInSet ?? false) || ($0.isSelected && $0.isInSet ?? true)) }
+//        setGame.deck.filter { $0.isDealt && !($0.isInSet ?? false) }
+    }
+    
+    var remainingCardsInDeck: Int {
+        setGame.deck.filter{ !$0.isDealt }.count
     }
     
     var score: Int {

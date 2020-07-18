@@ -10,12 +10,13 @@ import SwiftUI
 
 struct CardView: View {
     
-    var card: ShapeSetGame.Card
+    let card: ShapeSetGame.Card
 
     var body: some View {
         GeometryReader { geometry in
             self.body(for: geometry.size)
         }
+        
     }
     
     @ViewBuilder
@@ -23,13 +24,13 @@ struct CardView: View {
         ZStack {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
                 RoundedRectangle(cornerRadius: cornerRadius).stroke(cardStrokeColor, lineWidth: edgeLineWidth)
-            VStack {
+            VStack(spacing: size.height / 8) {
                 ForEach((1...card.shapeCount.rawValue), id: \.self) {_ in
                         self.shape(for: size)
                             .frame(maxWidth: .infinity)
                             .aspectRatio(contentMode: .fit)
-                            .padding(5)
-                }
+                    }
+                .padding(self.shapePadding(for: size))
             }
         }
     }
@@ -49,6 +50,10 @@ struct CardView: View {
             shape.fill(shapeColor).opacity(shapeShade)
             shape.stroke(shapeColor).opacity(card.shade == .unfilled ? 1 : shapeShade)
         }
+    }
+    
+    func shapePadding(for size: CGSize) -> CGFloat{
+        return size.height * 0.05
     }
     
     private var shapeColor: Color {
